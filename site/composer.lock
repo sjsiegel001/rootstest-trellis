@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ec0db5300baf2f15f21414ba4578436",
+    "content-hash": "fe1a631bccd7e870351e08300f98f825",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1986,6 +1986,37 @@
                 }
             ],
             "time": "2025-12-27T19:49:13+00:00"
+        },
+        {
+            "name": "wp-plugin/redis-cache",
+            "version": "2.8.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/redis-cache/",
+                "reference": "tags/2.8.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/redis-cache.2.8.0.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Till Krüss"
+                }
+            ],
+            "description": "A persistent object cache backend powered by Redis®¹. Supports Predis, PhpRedis, Relay, replication, sentinels, clustering and WP-CLI.",
+            "homepage": "https://wordpress.org/plugins/redis-cache/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/redis-cache/#developers",
+                "issues": "https://wordpress.org/support/plugin/redis-cache",
+                "source": "https://plugins.svn.wordpress.org/redis-cache"
+            },
+            "time": "2026-05-04T18:40:49+00:00"
         },
         {
             "name": "wp-theme/twentytwentyfive",
