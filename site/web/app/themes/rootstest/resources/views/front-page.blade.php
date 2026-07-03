@@ -1,42 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  @php
-    $stack = [
-      [
-        'icon' => '📦',
-        'title' => 'Bedrock',
-        'body' => 'WordPress structured as a Composer project — env-based config, sane folder layout, dependencies locked and versioned.',
-      ],
-      [
-        'icon' => '🔧',
-        'title' => 'Trellis',
-        'body' => 'Ansible playbooks provision the Ubuntu 24.04 server (nginx, PHP 8.3, MariaDB) and ship zero-downtime deploys.',
-      ],
-      [
-        'icon' => '🌱',
-        'title' => 'Sage 11',
-        'body' => 'This very theme: Blade templates and Acorn (Laravel) components, bundled by Vite and styled with Tailwind.',
-      ],
-      [
-        'icon' => '☁️',
-        'title' => 'AWS + Terraform',
-        'body' => 'Every resource — VPC, EC2, IAM, S3, CloudFront — defined as code in Terraform and tagged for one-command teardown.',
-      ],
-      [
-        'icon' => '🖼️',
-        'title' => 'S3 + CloudFront',
-        'body' => 'Media offloaded to a private S3 bucket and served worldwide through a CloudFront CDN at cdn.rootstest.de.',
-      ],
-      [
-        'icon' => '⚡',
-        'title' => 'Redis + HTTPS',
-        'body' => 'A persistent Redis object cache keeps things fast, and Let\'s Encrypt handles automatic, auto-renewing TLS.',
-      ],
-    ];
-  @endphp
-
-  {{-- Hero --}}
+  {{-- Hero (structural — lives in the template) --}}
   <section class="relative overflow-hidden">
     <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
       <div class="absolute left-1/2 top-[-15%] h-[520px] w-[900px] max-w-full -translate-x-1/2 rounded-full bg-gradient-to-tr from-fuchsia-600/30 via-indigo-600/20 to-cyan-500/20 blur-3xl"></div>
@@ -71,16 +36,11 @@
     </div>
   </section>
 
-  {{-- Stack grid --}}
-  <section id="stack" class="mx-auto max-w-6xl px-6 pb-24">
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      @foreach ($stack as $item)
-        <div class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition duration-200 hover:-translate-y-1 hover:border-slate-600 hover:bg-slate-900">
-          <div class="text-3xl">{{ $item['icon'] }}</div>
-          <h3 class="mt-4 text-lg font-semibold text-white">{{ $item['title'] }}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-slate-400">{{ $item['body'] }}</p>
-        </div>
-      @endforeach
-    </div>
-  </section>
+  {{-- Editable page content — the Stack Grid block is managed here, in the editor --}}
+  <div class="pb-16">
+    @while(have_posts())
+      @php(the_post())
+      @php(the_content())
+    @endwhile
+  </div>
 @endsection
