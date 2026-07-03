@@ -1,5 +1,5 @@
 mysql_root_password: "{{ vault_mysql_root_password }}" # Define this variable in group_vars/production/vault.yml
 
-# Nightly MySQL backups to S3. Uncomment and set to the Terraform
-# `backups_bucket` output to enable (see roles/mysql-backup).
-# mysql_backup_bucket: "rootstest-production-backups-263441240688"
+# Nightly MySQL backups to S3 (see roles/mysql-backup). Must match the
+# Terraform `backups_bucket` output.
+mysql_backup_bucket: "rootstest-production-backups-263441240688"
