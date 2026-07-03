@@ -8,6 +8,6 @@
       {!! __('Sorry, but the page you are trying to view does not exist.', 'sage') !!}
     </x-alert>
 
-    {!! get_search_form(false) !!}
+    {!! get_search_form(['echo' => false]) !!}
   @endif
 @endsection
