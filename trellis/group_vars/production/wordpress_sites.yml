@@ -9,7 +9,7 @@ wordpress_sites:
       - www.rootstest.de
     local_path: ../site
     branch: main
-    repo: git@github.com:example/example.com.git
+    repo: git@github.com:sjsiegel001/rootstest-trellis.git
     repo_subtree_path: site
     multisite:
       enabled: false
