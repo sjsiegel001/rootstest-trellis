@@ -5,13 +5,39 @@
       {!! $siteName !!}
     </a>
 
-    <nav class="flex items-center gap-6 text-sm text-slate-400" aria-label="Primary">
-      <a href="#stack" class="transition hover:text-white">Stack</a>
-      <a href="https://roots.io/docs/" class="hidden transition hover:text-white sm:inline">Docs</a>
-      <a href="https://roots.io"
-         class="rounded-lg border border-slate-700 px-3 py-1.5 transition hover:bg-slate-900 hover:text-white">
-        roots.io
-      </a>
-    </nav>
+    @if (has_nav_menu('primary_navigation'))
+      {{-- Desktop nav --}}
+      <nav class="hidden md:block" aria-label="{{ wp_get_nav_menu_name('primary_navigation') }}">
+        {!! wp_nav_menu([
+          'theme_location' => 'primary_navigation',
+          'container' => false,
+          'menu_class' => 'flex items-center gap-4',
+          'echo' => false,
+        ]) !!}
+      </nav>
+
+      {{-- Mobile toggle --}}
+      <button type="button" data-nav-toggle aria-controls="mobile-nav" aria-expanded="false"
+        class="inline-flex items-center justify-center rounded-lg border border-slate-700 p-2 text-slate-300 transition hover:bg-slate-900 md:hidden">
+        <span class="sr-only">{{ __('Toggle navigation', 'sage') }}</span>
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    @endif
   </div>
+
+  @if (has_nav_menu('primary_navigation'))
+    {{-- Mobile panel --}}
+    <nav id="mobile-nav" data-nav-panel hidden class="border-t border-slate-800 md:hidden" aria-label="{{ wp_get_nav_menu_name('primary_navigation') }}">
+      {!! wp_nav_menu([
+        'theme_location' => 'primary_navigation',
+        'container' => false,
+        'menu_class' => 'flex flex-col gap-1 px-6 py-4',
+        'echo' => false,
+      ]) !!}
+    </nav>
+  @endif
 </header>
