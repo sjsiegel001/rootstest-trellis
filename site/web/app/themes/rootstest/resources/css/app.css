@@ -46,3 +46,37 @@
     @apply border-l-2 border-fuchsia-500/50 pl-4 italic text-slate-400;
   }
 }
+
+/* Contact Form 7 — dark theme. */
+@layer components {
+  .wpcf7-form p {
+    @apply mb-5;
+  }
+  .wpcf7-form label {
+    @apply block text-sm font-medium text-slate-300;
+  }
+  .wpcf7-form-control:not(.wpcf7-submit) {
+    @apply mt-2 block w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 transition;
+  }
+  .wpcf7-form-control:not(.wpcf7-submit)::placeholder {
+    @apply text-slate-500;
+  }
+  .wpcf7-form-control:not(.wpcf7-submit):focus {
+    @apply border-fuchsia-500 ring-2 ring-fuchsia-500/40 outline-none;
+  }
+  .wpcf7-form textarea.wpcf7-form-control {
+    @apply min-h-32;
+  }
+  .wpcf7-form-control.wpcf7-not-valid {
+    @apply border-rose-500;
+  }
+  .wpcf7-not-valid-tip {
+    @apply mt-1 block text-sm text-rose-400;
+  }
+  .wpcf7-submit {
+    @apply mt-2 inline-flex cursor-pointer rounded-lg bg-white px-6 py-3 text-sm font-medium text-slate-900 transition hover:bg-slate-200;
+  }
+  .wpcf7-response-output {
+    @apply mt-5 rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-3 text-sm text-slate-300;
+  }
+}
