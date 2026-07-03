@@ -31,6 +31,12 @@ function meta_description(): string
 }
 
 add_action('wp_head', function () {
+    // Defer to a dedicated SEO plugin (e.g. The SEO Framework) when present,
+    // so we don't emit duplicate description/OG/Twitter tags.
+    if (defined('THE_SEO_FRAMEWORK_PRESENT')) {
+        return;
+    }
+
     $description = trim(meta_description());
     $title = wp_get_document_title();
     $url = is_singular() ? (get_permalink() ?: home_url('/')) : home_url('/');
@@ -68,6 +74,10 @@ add_action('wp_head', function () {
  * Add the tagline to the front-page <title> so it isn't just the site name.
  */
 add_filter('document_title_parts', function ($parts) {
+    if (defined('THE_SEO_FRAMEWORK_PRESENT')) {
+        return $parts;
+    }
+
     if (is_front_page() && ($tagline = get_bloginfo('description'))) {
         $parts['tagline'] = $tagline;
     }
