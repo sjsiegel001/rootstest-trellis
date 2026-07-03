@@ -22,8 +22,12 @@ add_action('wp_head', function () {
         return;
     }
 
+    // Served first-party through /u (see trellis nginx-includes/umami-proxy) so
+    // blockers that match the umami.is domain don't drop the script or beacon.
     printf(
-        '<script defer src="https://cloud.umami.is/script.js" data-website-id="%s"></script>' . "\n",
-        esc_attr($website_id)
+        '<script defer src="%s" data-website-id="%s" data-host-url="%s"></script>' . "\n",
+        esc_url(home_url('/u/script.js')),
+        esc_attr($website_id),
+        esc_url(home_url('/u'))
     );
 }, 20);

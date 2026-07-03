@@ -1,0 +1,19 @@
+# First-party proxy for Umami Cloud analytics. Routes the tracker script and the
+# collection beacon through this domain so privacy blockers (which match the
+# umami.is domain) don't drop them. X-Forwarded-For preserves the visitor IP so
+# Umami still gets correct country/geo.
+
+location = /u/script.js {
+    proxy_pass https://cloud.umami.is/script.js;
+    proxy_ssl_server_name on;
+    proxy_set_header Host cloud.umami.is;
+    proxy_set_header Accept-Encoding "";
+}
+
+location = /u/api/send {
+    proxy_pass https://cloud.umami.is/api/send;
+    proxy_ssl_server_name on;
+    proxy_set_header Host cloud.umami.is;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Real-IP $remote_addr;
+}
