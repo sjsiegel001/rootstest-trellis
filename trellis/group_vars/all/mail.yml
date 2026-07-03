@@ -8,5 +8,5 @@
 mail_smtp_server: email-smtp.us-east-1.amazonaws.com:587
 mail_admin: teeky301@gmail.com
 mail_hostname: rootstest.de
-mail_user: "REPLACE_WITH_terraform_output_ses_smtp_username"
+mail_user: "AKIAT2VSSKJYPCKI7HL2" # SES SMTP username (terraform output ses_smtp_username)
 mail_password: "{{ vault_mail_password }}" # Define in group_vars/all/vault.yml

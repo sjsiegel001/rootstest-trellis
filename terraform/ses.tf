@@ -15,12 +15,6 @@ resource "aws_ses_domain_dkim" "main" {
   domain = aws_ses_domain_identity.main.domain
 }
 
-# Custom MAIL FROM subdomain for SPF alignment / better deliverability.
-resource "aws_ses_domain_mail_from" "main" {
-  domain           = aws_ses_domain_identity.main.domain
-  mail_from_domain = "mail.${aws_ses_domain_identity.main.domain}"
-}
-
 # IAM user whose access key doubles as the SES SMTP username/password.
 resource "aws_iam_user" "ses_smtp" {
   name = "${var.project}-${var.environment}-ses-smtp"
@@ -53,14 +47,6 @@ output "ses_domain_verification" {
 output "ses_dkim_cnames" {
   description = "3 CNAMEs: <token>._domainkey.<domain> -> <token>.dkim.amazonses.com"
   value       = aws_ses_domain_dkim.main.dkim_tokens
-}
-
-output "ses_mail_from_dns" {
-  description = "MAIL FROM subdomain DNS (mail.<domain>): an MX and an SPF TXT"
-  value = {
-    mx_record  = "mail.${var.mail_domain}  MX   10 feedback-smtp.${var.region}.amazonses.com"
-    spf_record = "mail.${var.mail_domain}  TXT  \"v=spf1 include:amazonses.com ~all\""
-  }
 }
 
 output "ses_smtp_username" {
