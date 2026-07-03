@@ -21,3 +21,5 @@ wordpress_sites:
     object_cache:
       enabled: true
       provider: redis
+    xmlrpc:
+      enabled: false
