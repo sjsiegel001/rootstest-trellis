@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wsl.exe -l -v)",
+      "Read(//mnt/c/Windows/System32/drivers/etc/**)",
+      "Bash(mysql -e \"SHOW DATABASES;\")",
+      "Bash(sudo ss -tlnp)",
+      "Bash(ip -4 addr show eth0)",
+      "Bash(sudo mysql -N -e \"SELECT user,host FROM mysql.user ORDER BY user,host;\")",
+      "Bash(mysql -N -e \"SELECT user,host FROM mysql.user;\")",
+      "Bash(mysql -h127.0.0.1 -P3306 -urootstest_de -p\"AGAWfUgVVSLoFMzEsFF1ASGBu3rr3Ba4dEXnq402MSNFENWRCzkLbdhfQBk6sW3Y\" -e \"SELECT 'TCP 127.0.0.1 works' AS result;\")",
+      "Bash(grep -vE 'AUTH_KEY|AUTH_SALT|LOGGED_IN|NONCE|SECURE' .env)",
+      "Bash(ls web/app/themes web/app/plugins web/app/mu-plugins)",
+      "Bash(wp user *)",
+      "WebFetch(domain:roots.io)"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+# Created by trellis-cli vcanary
+# Documentation: https://roots.io/trellis/docs/wordpress-sites/
+
+wordpress_sites:
+  rootstest.de:
+    site_hosts:
+    - canonical: rootstest.test
+      redirects:
+      - www.rootstest.test
+    local_path: ../site
+    admin_email: admin@rootstest.test
+    multisite:
+      enabled: false
+    ssl:
+      enabled: false
+      provider: self-signed
+    cache:
+      enabled: false
