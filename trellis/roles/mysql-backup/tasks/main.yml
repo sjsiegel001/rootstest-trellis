@@ -1,10 +1,37 @@
 ---
-- name: Install AWS CLI (streams backups to S3 via the instance IAM role)
-  apt:
-    name: awscli
-    state: present
-    cache_valid_time: 3600
+- name: Check for the AWS CLI
+  stat:
+    path: /usr/local/bin/aws
+  register: aws_cli
   when: mysql_backup_bucket | length > 0
+
+- name: Install the official AWS CLI v2
+  when:
+    - mysql_backup_bucket | length > 0
+    - not (aws_cli.stat.exists | default(false))
+  block:
+    - name: Ensure unzip is available
+      apt:
+        name: unzip
+        state: present
+        cache_valid_time: 3600
+
+    - name: Download the AWS CLI v2 installer
+      get_url:
+        url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+        dest: /tmp/awscliv2.zip
+        mode: "0644"
+
+    - name: Unpack the AWS CLI v2 installer
+      unarchive:
+        src: /tmp/awscliv2.zip
+        dest: /tmp
+        remote_src: true
+
+    - name: Run the AWS CLI v2 installer
+      command: /tmp/aws/install
+      args:
+        creates: /usr/local/bin/aws
 
 - name: Install the MySQL backup script
   template:
