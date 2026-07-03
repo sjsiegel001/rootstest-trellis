@@ -1,0 +1,15 @@
+#!/bin/bash
+# Managed by Trellis (roles/mysql-backup). Dumps a site's database, gzips it,
+# and streams it straight to S3 using the instance's IAM role — no temp file,
+# no stored credentials.
+set -euo pipefail
+
+SITE="${1:?usage: mysql-backup <site>}"
+BUCKET="{{ mysql_backup_bucket }}"
+SITE_ROOT="{{ www_root }}/${SITE}/current"
+STAMP="$(date -u +%Y%m%d_%H%M%S)"
+KEY="mysql/${SITE}/${SITE}_${STAMP}.sql.gz"
+
+cd "${SITE_ROOT}"
+wp db export - | gzip -9 | aws s3 cp - "s3://${BUCKET}/${KEY}" --only-show-errors
+echo "$(date -uIs) backed up ${SITE} -> s3://${BUCKET}/${KEY}"

@@ -33,3 +33,4 @@
     - { role: wp-cli, tags: [wp-cli] }
     - { role: letsencrypt, tags: [letsencrypt], when: sites_using_letsencrypt | count > 0 }
     - { role: wordpress-setup, tags: [wordpress, wordpress-setup, letsencrypt] }
+    - { role: mysql-backup, tags: [mysql-backup] }

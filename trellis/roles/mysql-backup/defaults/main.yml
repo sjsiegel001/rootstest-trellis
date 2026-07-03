@@ -1,0 +1,6 @@
+---
+# Nightly MySQL backup to S3. Disabled until mysql_backup_bucket is set
+# (in group_vars/<env>/main.yml) to the Terraform `backups_bucket` output.
+mysql_backup_bucket: ""
+mysql_backup_hour: 3
+mysql_backup_minute: 15
