@@ -32,9 +32,12 @@ resource "aws_cloudfront_distribution" "uploads" {
     }
   }
 
-  # Default *.cloudfront.net cert. Add aliases + an ACM cert (us-east-1) for a custom CDN domain later.
+  aliases = [var.cdn_domain]
+
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = aws_acm_certificate_validation.cdn.certificate_arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 }
 

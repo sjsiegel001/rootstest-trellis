@@ -58,6 +58,12 @@ variable "subnet_cidr" {
   default     = "10.0.1.0/24"
 }
 
+variable "cdn_domain" {
+  description = "Custom CNAME for the media CloudFront distribution"
+  type        = string
+  default     = "cdn.rootstest.de"
+}
+
 variable "site_domains" {
   description = "Site domains used to build S3 CORS allowed origins"
   type        = list(string)

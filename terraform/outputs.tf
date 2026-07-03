@@ -23,6 +23,20 @@ output "cloudfront_domain" {
   value       = "https://${aws_cloudfront_distribution.uploads.domain_name}"
 }
 
+output "acm_validation_record" {
+  description = "Add this CNAME to DNS to validate the CDN certificate"
+  value = [for o in aws_acm_certificate.cdn.domain_validation_options : {
+    name  = o.resource_record_name
+    type  = o.resource_record_type
+    value = o.resource_record_value
+  }]
+}
+
+output "cdn_cname_target" {
+  description = "Point cdn.rootstest.de (CNAME) at this once the cert is issued"
+  value       = aws_cloudfront_distribution.uploads.domain_name
+}
+
 output "iam_role_name" {
   description = "Instance-profile role backing S3 access (no static keys)"
   value       = aws_iam_role.wp.name
