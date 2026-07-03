@@ -2,3 +2,16 @@
 @source "../../app/**/*.php";
 @source "../**/*.blade.php";
 @source "../**/*.js";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-300 antialiased;
+    font-family:
+      ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif;
+  }
+}
