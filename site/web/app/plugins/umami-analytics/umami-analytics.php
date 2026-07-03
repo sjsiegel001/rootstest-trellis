@@ -11,6 +11,11 @@ if (! defined('ABSPATH')) {
 }
 
 add_action('wp_head', function () {
+    // Only ever track on production, so dev/staging traffic never hits Umami.
+    if (! defined('WP_ENV') || WP_ENV !== 'production') {
+        return;
+    }
+
     $website_id = $_ENV['UMAMI_WEBSITE_ID'] ?? '';
 
     if (! $website_id) {
