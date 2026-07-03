@@ -34,6 +34,8 @@ add_action('init', function () {
         'category' => 'design',
         'icon' => 'grid-view',
         'attributes' => [
+            'heading' => ['type' => 'string', 'default' => 'Built on the Roots stack'],
+            'intro' => ['type' => 'string', 'default' => 'Every layer of this page — from local development through a zero-downtime production release — runs on the same battle-tested WordPress toolchain, hosted on AWS and defined entirely in code.'],
             'items' => [
                 'type' => 'array',
                 'default' => [

@@ -1,8 +1,21 @@
 @php
+  $heading = $attributes['heading'] ?? '';
+  $intro = $attributes['intro'] ?? '';
   $items = $attributes['items'] ?? [];
 @endphp
 
-<section id="stack" class="mx-auto max-w-6xl px-6 py-8">
+<section id="stack" class="mx-auto max-w-6xl px-6 py-12">
+  @if ($heading || $intro)
+    <div class="mx-auto mb-12 max-w-2xl text-center">
+      @if ($heading)
+        <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">{{ $heading }}</h2>
+      @endif
+      @if ($intro)
+        <p class="mt-4 text-lg leading-relaxed text-slate-400">{{ $intro }}</p>
+      @endif
+    </div>
+  @endif
+
   <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
     @foreach ($items as $item)
       <div class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition duration-200 hover:-translate-y-1 hover:border-slate-600 hover:bg-slate-900">

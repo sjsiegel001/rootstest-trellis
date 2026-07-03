@@ -72,6 +72,8 @@ registerBlockType('rootstest/stack-grid', {
   icon: 'grid-view',
   category: 'design',
   attributes: {
+    heading: { type: 'string', default: '' },
+    intro: { type: 'string', default: '' },
     items: { type: 'array', default: [] },
   },
   edit({ attributes, setAttributes }) {
@@ -95,6 +97,20 @@ registerBlockType('rootstest/stack-grid', {
       el(
         InspectorControls,
         null,
+        el(
+          PanelBody,
+          { title: 'Section', initialOpen: true },
+          el(TextControl, {
+            label: 'Heading',
+            value: attributes.heading || '',
+            onChange: (heading) => setAttributes({ heading }),
+          }),
+          el(TextareaControl, {
+            label: 'Intro',
+            value: attributes.intro || '',
+            onChange: (intro) => setAttributes({ intro }),
+          }),
+        ),
         items.map((item, index) =>
           el(
             PanelBody,
