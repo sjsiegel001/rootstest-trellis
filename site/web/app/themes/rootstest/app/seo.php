@@ -85,14 +85,3 @@ add_filter('document_title_parts', function ($parts) {
     return $parts;
 });
 
-/**
- * Security/privacy headers flagged by SEO crawlers.
- */
-add_action('send_headers', function () {
-    if (headers_sent()) {
-        return;
-    }
-
-    header('Referrer-Policy: strict-origin-when-cross-origin');
-    header('X-Content-Type-Options: nosniff');
-});
