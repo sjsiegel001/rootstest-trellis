@@ -1,1 +1,5 @@
 mysql_root_password: "{{ vault_mysql_root_password }}" # Define this variable in group_vars/production/vault.yml
+
+# Run PHP-FPM as a separate runtime user from the deploy user and restrict
+# writable paths to an allowlist. https://roots.io/trellis/docs/security/
+wordpress_runtime_hardened: true

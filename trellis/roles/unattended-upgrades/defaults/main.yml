@@ -1,0 +1,5 @@
+---
+# Automatically reboot when a patched package requires it. Off by default so a
+# kernel update never bounces the box mid-traffic without you knowing.
+unattended_automatic_reboot: false
+unattended_automatic_reboot_time: "04:00"
