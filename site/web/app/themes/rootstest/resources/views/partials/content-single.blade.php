@@ -9,6 +9,13 @@
     </div>
   </header>
 
+  @if (has_post_thumbnail())
+    {!! get_the_post_thumbnail(null, 'large', [
+      'class' => 'mt-8 aspect-[1200/630] w-full rounded-2xl border border-slate-800 object-cover',
+      'alt' => get_the_title(),
+    ]) !!}
+  @endif
+
   <div class="e-content entry-content mt-10">
     @php(the_content())
   </div>

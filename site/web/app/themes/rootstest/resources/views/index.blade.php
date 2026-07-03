@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="mx-auto max-w-3xl px-6 py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
     <header class="border-b border-slate-800 pb-8">
       <h1 class="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
         {{ get_the_title(get_option('page_for_posts')) ?: __('Blog', 'sage') }}
       </h1>
-      <p class="mt-3 text-lg leading-relaxed text-slate-400">
+      <p class="mt-3 max-w-2xl text-lg leading-relaxed text-slate-400">
         Notes on the bespoke bits — the block framework, first-party analytics, transactional mail, nightly backups, and more.
       </p>
     </header>
@@ -17,7 +17,7 @@
       </x-alert>
     @endif
 
-    <div class="mt-12 space-y-12">
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
       @while(have_posts())
         @php(the_post())
         @includeFirst(['partials.content-' . get_post_type(), 'partials.content'])
