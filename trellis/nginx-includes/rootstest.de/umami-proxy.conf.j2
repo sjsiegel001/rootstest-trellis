@@ -7,6 +7,7 @@ location = /u/script.js {
     proxy_pass https://cloud.umami.is/script.js;
     proxy_ssl_server_name on;
     proxy_set_header Host cloud.umami.is;
+    proxy_hide_header Referrer-Policy;
     proxy_set_header Accept-Encoding "";
 }
 
@@ -14,6 +15,7 @@ location = /u/api/send {
     proxy_pass https://cloud.umami.is/api/send;
     proxy_ssl_server_name on;
     proxy_set_header Host cloud.umami.is;
+    proxy_hide_header Referrer-Policy;
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header X-Real-IP $remote_addr;
 }
