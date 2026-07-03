@@ -25,3 +25,4 @@ wordpress_sites:
       enabled: false
     env:
       umami_website_id: "fc80b222-893b-44a1-9b79-bde2029a7ea0"
+      recaptcha_site_key: "6Lc0NUMtAAAAAAFusrYC3WisTuJDcXlwOfn4giW8"

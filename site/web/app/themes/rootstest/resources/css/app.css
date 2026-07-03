@@ -151,3 +151,22 @@
     @apply mt-2 cursor-pointer rounded-lg bg-white px-6 py-3 text-sm font-medium text-slate-900 transition hover:bg-slate-200;
   }
 }
+
+/* WordPress search form (get_search_form) — dark theme. Used on 404 + search. */
+@layer components {
+  .search-form {
+    @apply flex gap-2;
+  }
+  .search-form label {
+    @apply flex-1;
+  }
+  .search-form .search-field {
+    @apply block w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 placeholder:text-slate-500;
+  }
+  .search-form .search-field:focus {
+    @apply border-fuchsia-500 ring-2 ring-fuchsia-500/40 outline-none;
+  }
+  .search-form .search-submit {
+    @apply cursor-pointer rounded-lg bg-white px-5 py-3 text-sm font-medium text-slate-900 transition hover:bg-slate-200;
+  }
+}

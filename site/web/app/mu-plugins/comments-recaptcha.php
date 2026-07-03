@@ -12,19 +12,26 @@ if (! defined('ABSPATH')) {
 
 function rt_comment_recaptcha_keys(): ?array
 {
-    if (! class_exists('WPCF7')) {
+    // Prefer environment variables (RECAPTCHA_SITE_KEY / RECAPTCHA_SECRET_KEY).
+    $sitekey = (string) ($_ENV['RECAPTCHA_SITE_KEY'] ?? '');
+    $secret = (string) ($_ENV['RECAPTCHA_SECRET_KEY'] ?? '');
+
+    // Fall back to Contact Form 7's stored keys if the env isn't configured.
+    if ((! $sitekey || ! $secret) && class_exists('WPCF7')) {
+        $recaptcha = (array) WPCF7::get_option('recaptcha');
+
+        if (! empty($recaptcha)) {
+            $key = (string) array_key_first($recaptcha);
+            $sitekey = $sitekey ?: $key;
+            $secret = $secret ?: (string) $recaptcha[$key];
+        }
+    }
+
+    if (! $sitekey || ! $secret) {
         return null;
     }
 
-    $recaptcha = (array) WPCF7::get_option('recaptcha');
-
-    if (empty($recaptcha)) {
-        return null;
-    }
-
-    $sitekey = (string) array_key_first($recaptcha);
-
-    return ['sitekey' => $sitekey, 'secret' => (string) $recaptcha[$sitekey]];
+    return ['sitekey' => $sitekey, 'secret' => $secret];
 }
 
 // Make sure the reCAPTCHA API is available on comment pages.
