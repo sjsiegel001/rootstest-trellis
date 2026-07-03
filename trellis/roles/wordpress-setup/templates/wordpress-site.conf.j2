@@ -247,6 +247,11 @@ server {
   {% endif -%}
   {% endblock -%}
 
+  {% if fastcgi_cache_enabled -%}
+  # Expose FastCGI page-cache result (HIT/MISS/BYPASS) for observability.
+  add_header X-Cache-Status $upstream_cache_status always;
+  {% endif -%}
+
   {% block robots_tag_header -%}
   {% if robots_tag_header_enabled -%}
   # Prevent search engines from indexing non-production environments
