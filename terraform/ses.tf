@@ -7,6 +7,12 @@ variable "mail_domain" {
   default     = "rootstest.de"
 }
 
+variable "dmarc_rua" {
+  description = "Address to receive DMARC aggregate reports"
+  type        = string
+  default     = "teeky301@gmail.com"
+}
+
 resource "aws_ses_domain_identity" "main" {
   domain = var.mail_domain
 }
@@ -47,6 +53,11 @@ output "ses_domain_verification" {
 output "ses_dkim_cnames" {
   description = "3 CNAMEs: <token>._domainkey.<domain> -> <token>.dkim.amazonses.com"
   value       = aws_ses_domain_dkim.main.dkim_tokens
+}
+
+output "dmarc_record" {
+  description = "TXT at _dmarc.<domain>. Start at p=none to monitor, then tighten to quarantine, then reject."
+  value       = "_dmarc.${var.mail_domain}  TXT  \"v=DMARC1; p=none; rua=mailto:${var.dmarc_rua}; adkim=s; aspf=r; fo=1\""
 }
 
 output "ses_smtp_username" {
