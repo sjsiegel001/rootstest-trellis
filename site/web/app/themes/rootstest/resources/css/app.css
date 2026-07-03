@@ -80,3 +80,8 @@
     @apply mt-5 rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-3 text-sm text-slate-300;
   }
 }
+
+/* Hide the reCAPTCHA v3 badge — the required disclosure is shown in the footer. */
+.grecaptcha-badge {
+  visibility: hidden;
+}
