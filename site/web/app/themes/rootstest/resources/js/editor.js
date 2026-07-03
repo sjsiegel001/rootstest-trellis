@@ -130,9 +130,16 @@ registerBlockType('rootstest/stack-grid', {
         attributes.heading ? el('strong', null, attributes.heading) : null,
         attributes.intro ? el('p', { style: MUTED }, attributes.intro) : null,
         el(
-          'ul',
-          { style: { margin: '8px 0 0', paddingLeft: '18px' } },
-          items.map((item, i) => el('li', { key: i }, `${item.icon || ''} ${item.title || ''}`.trim())),
+          'div',
+          { style: { marginTop: '8px' } },
+          items.map((item, i) =>
+            el(
+              'div',
+              { key: i, style: { padding: '8px 0', borderTop: '1px solid #e0e0e0' } },
+              el('div', null, el('strong', null, `${item.icon || ''} ${item.title || ''}`.trim())),
+              item.body ? el('div', { style: MUTED }, item.body) : null,
+            ),
+          ),
         ),
       ),
     );
