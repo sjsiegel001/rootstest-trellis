@@ -134,3 +134,63 @@ registerBlockType('rootstest/stack-grid', {
     return null;
   },
 });
+
+// `rootstest/hero`: editable hero (eyebrow / title / lead / two CTAs), rendered
+// by resources/views/blocks/hero.blade.php with the full custom design intact.
+registerBlockType('rootstest/hero', {
+  apiVersion: 3,
+  title: 'Hero',
+  icon: 'cover-image',
+  category: 'design',
+  attributes: {
+    eyebrow: { type: 'string', default: '' },
+    title: { type: 'string', default: '' },
+    lead: { type: 'string', default: '' },
+    primaryLabel: { type: 'string', default: '' },
+    primaryUrl: { type: 'string', default: '' },
+    secondaryLabel: { type: 'string', default: '' },
+    secondaryUrl: { type: 'string', default: '' },
+  },
+  edit({ attributes, setAttributes }) {
+    const blockProps = useBlockProps();
+    const field = (key, label, extra = {}) =>
+      el(TextControl, {
+        label,
+        value: attributes[key] || '',
+        onChange: (value) => setAttributes({ [key]: value }),
+        ...extra,
+      });
+
+    return el(
+      Fragment,
+      null,
+      el(
+        InspectorControls,
+        null,
+        el(
+          PanelBody,
+          { title: 'Content', initialOpen: true },
+          field('eyebrow', 'Eyebrow'),
+          field('title', 'Title'),
+          el(TextareaControl, {
+            label: 'Lead',
+            value: attributes.lead || '',
+            onChange: (lead) => setAttributes({ lead }),
+          }),
+        ),
+        el(
+          PanelBody,
+          { title: 'Buttons', initialOpen: false },
+          field('primaryLabel', 'Primary label'),
+          field('primaryUrl', 'Primary URL'),
+          field('secondaryLabel', 'Secondary label'),
+          field('secondaryUrl', 'Secondary URL'),
+        ),
+      ),
+      el('div', blockProps, el(ServerSideRender, { block: 'rootstest/hero', attributes })),
+    );
+  },
+  save() {
+    return null;
+  },
+});

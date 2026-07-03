@@ -52,4 +52,25 @@ add_action('init', function () {
         ],
         'render_callback' => fn ($attributes) => view('blocks.stack-grid', ['attributes' => $attributes])->render(),
     ]);
+
+    register_block_type('rootstest/hero', [
+        'api_version' => 3,
+        'title' => __('Hero', 'sage'),
+        'category' => 'design',
+        'icon' => 'cover-image',
+        'attributes' => [
+            'eyebrow' => ['type' => 'string', 'default' => 'Live on AWS · deployed with Trellis'],
+            'title' => ['type' => 'string', 'default' => 'The Roots stack, shipped to production.'],
+            'lead' => ['type' => 'string', 'default' => 'A WordPress site built on Bedrock, provisioned with Trellis, and themed with Sage 11. Infrastructure lives in Terraform; media rides a CloudFront CDN. This whole page is a Blade template compiled by Vite.'],
+            'primaryLabel' => ['type' => 'string', 'default' => 'Explore Roots'],
+            'primaryUrl' => ['type' => 'string', 'default' => 'https://roots.io'],
+            'secondaryLabel' => ['type' => 'string', 'default' => 'See the stack ↓'],
+            'secondaryUrl' => ['type' => 'string', 'default' => '#stack'],
+        ],
+        'supports' => [
+            'html' => false,
+            'align' => ['full'],
+        ],
+        'render_callback' => fn ($attributes) => view('blocks.hero', ['attributes' => $attributes])->render(),
+    ]);
 });
