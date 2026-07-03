@@ -23,3 +23,5 @@ wordpress_sites:
       provider: redis
     xmlrpc:
       enabled: false
+    env:
+      umami_website_id: "fc80b222-893b-44a1-9b79-bde2029a7ea0"
