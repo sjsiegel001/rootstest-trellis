@@ -10,3 +10,13 @@
 #   command: wp acorn optimize
 #   args:
 #     chdir: "{{ deploy_helper.new_release_path }}"
+
+# Install the Redis object-cache drop-in each release.
+# `web/app/` is replaced on every deploy, so the object-cache.php drop-in must
+# be re-copied from the (Composer-installed) redis-cache plugin. Copying it here
+# — rather than committing it — keeps the drop-in version-matched to the plugin.
+- name: Enable Redis object cache drop-in
+  command: wp redis enable
+  args:
+    chdir: "{{ deploy_helper.new_release_path }}"
+  changed_when: true
