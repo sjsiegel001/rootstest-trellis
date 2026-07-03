@@ -40,6 +40,12 @@ variable "ssh_ingress_cidr" {
   default     = "0.0.0.0/0"
 }
 
+variable "availability_zone" {
+  description = "AZ for the subnet/instance. Pin to one that supports gp3 (some us-east-1 zones like us-east-1e do not)."
+  type        = string
+  default     = "us-east-1a"
+}
+
 variable "vpc_cidr" {
   description = "CIDR block for the dedicated VPC"
   type        = string

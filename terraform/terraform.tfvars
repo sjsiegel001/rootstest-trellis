@@ -9,4 +9,6 @@ ssh_public_key_path = "~/.ssh/id_ed25519.pub"
 # Recommended: replace with "<your.ip>/32" so only you can SSH.
 ssh_ingress_cidr = "0.0.0.0/0"
 
+availability_zone = "us-east-1a"
+
 site_domains = ["rootstest.de", "www.rootstest.de"]
