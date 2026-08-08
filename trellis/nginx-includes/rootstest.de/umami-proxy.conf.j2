@@ -2,9 +2,20 @@
 # collection beacon through this domain so privacy blockers (which match the
 # umami.is domain) don't drop them. X-Forwarded-For preserves the visitor IP so
 # Umami still gets correct country/geo.
+#
+# The upstream host is held in a variable and resolved at REQUEST time (via the
+# resolver below) rather than at config-load time. With a literal hostname in
+# proxy_pass, nginx resolves it while loading config and treats a failed lookup
+# as a fatal `[emerg] host not found in upstream`, refusing to (re)start at all
+# -- so a transient DNS blip for Umami would take the entire site down. Deferring
+# resolution keeps nginx booting even if cloud.umami.is is briefly unresolvable;
+# only the analytics endpoints degrade (502), never the site.
+resolver 127.0.0.53 valid=30s;
+resolver_timeout 5s;
 
 location = /u/script.js {
-    proxy_pass https://cloud.umami.is/script.js;
+    set $umami_upstream cloud.umami.is;
+    proxy_pass https://$umami_upstream/script.js;
     proxy_ssl_server_name on;
     proxy_set_header Host cloud.umami.is;
     proxy_hide_header Referrer-Policy;
@@ -12,7 +23,8 @@ location = /u/script.js {
 }
 
 location = /u/api/send {
-    proxy_pass https://cloud.umami.is/api/send;
+    set $umami_upstream cloud.umami.is;
+    proxy_pass https://$umami_upstream/api/send;
     proxy_ssl_server_name on;
     proxy_set_header Host cloud.umami.is;
     proxy_hide_header Referrer-Policy;
